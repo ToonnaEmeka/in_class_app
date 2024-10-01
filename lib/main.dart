@@ -1,38 +1,13 @@
-import 'dart:io' show Platform;
-import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:window_size/window_size.dart';
+import 'package:provider/provider.dart';  // Ensure provider is imported
 
 void main() {
-  setupWindow();
   runApp(
     ChangeNotifierProvider(
       create: (context) => Counter(),
       child: const MyApp(),
     ),
   );
-}
-
-const double windowWidth = 360;
-const double windowHeight = 640;
-
-void setupWindow() {
-  if (!kIsWeb && (Platform.isWindows || Platform.isLinux || Platform.isMacOS)) {
-    WidgetsFlutterBinding.ensureInitialized();
-
-    setWindowTitle('Provider Counter');
-    setWindowMinSize(const Size(windowWidth, windowHeight));
-    setWindowMaxSize(const Size(windowWidth, windowHeight));
-
-    getCurrentScreen().then((screen) {
-      setWindowFrame(Rect.fromCenter(
-        center: screen!.frame.center,
-        width: windowWidth,
-        height: windowHeight,
-      ));
-    });
-  }
 }
 
 class Counter with ChangeNotifier {
@@ -50,7 +25,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Flutter Demo', //demo
       theme: ThemeData(
         primarySwatch: Colors.blue,
         useMaterial3: true,
@@ -94,4 +69,5 @@ class MyHomePage extends StatelessWidget {
     );
   }
 }
+
 
